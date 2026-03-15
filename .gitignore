@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+
+# Backend env
+backend/.env
+backend/venv/
+backend/*.db
+backend/*.sqlite3
+
+# Logs
+logs/
+*.log
+
+# ML models (optional, remove if you want to commit them)
+backend/ml_models/*.pkl
+backend/ml_models/*.joblib
+
+# Node
+frontend/node_modules/
+node_modules/
+
+# Frontend env
+frontend/.env
+
+# Build
+frontend/dist/
+build/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
