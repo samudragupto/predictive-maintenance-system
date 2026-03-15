@@ -233,3 +233,320 @@ flowchart TD
     K --> M
     L --> M
 ```
+
+# Data Flow
+
+Operational flow:
+
+- Telemetry data arrives
+- API validates payload
+- Payload is pushed to Kafka
+- Consumer reads from Kafka
+- Telemetry processor stores and evaluates it
+- ML model predicts health risk
+- Master Agent triggers downstream workers
+- Dashboard updates from DB/cache
+
+---
+
+# AI/ML Flow
+
+### ML Layer
+
+Model classifies telemetry into:
+
+- Healthy
+- Warning
+- Critical
+
+Algorithms used:
+
+- **XGBoost**
+- **Random Forest**
+
+### Agent Layer
+
+Master agent interprets ML results and dispatches tasks to:
+
+- Diagnosis Agent
+- Cost Agent
+- Scheduling Agent
+- Behavior Agent
+- Security / UEBA Agent
+
+---
+
+# Tech Stack
+
+## Backend
+
+- Python 3.11
+- FastAPI
+- SQLAlchemy
+- AsyncPG
+- PostgreSQL
+- Redis
+- Apache Kafka
+- aiokafka
+
+## AI / ML
+
+- scikit-learn
+- XGBoost
+- Pandas
+- NumPy
+- LangChain
+- OpenAI (optional)
+
+## Frontend
+
+- React
+- Vite
+- TailwindCSS
+- Recharts
+- Clerk Authentication
+- Axios
+
+## Infrastructure
+
+- Docker
+- Docker Compose
+
+---
+
+# Project Structure
+
+```text
+predictive-maintenance-system/
+
+backend/
+ ├ agents/
+ ├ config/
+ ├ data/
+ ├ ml_models/
+ ├ models/
+ ├ routes/
+ ├ services/
+ ├ telemetry/
+ ├ utils/
+ ├ train_ml.py
+ ├ train_gpu.py
+ ├ seed_history.py
+ ├ main.py
+ └ requirements.txt
+
+frontend/
+ ├ src/
+ ├ public/
+ ├ package.json
+ └ vite.config.js
+
+docker-compose.yml
+fleet_simulator.py
+README.md
+```
+
+---
+
+# How It Works
+
+### Example Scenario
+
+Vehicle telemetry:
+
+```
+engine temp = 121°C
+oil level = 18%
+brake wear = 82%
+```
+
+System actions:
+
+1. Telemetry stored
+2. ML predicts **critical failure risk**
+3. Diagnosis agent detects **engine/oil issue**
+4. Cost agent estimates service price
+5. Scheduling agent books service slot
+6. Dashboard updates automatically
+
+---
+
+# Database Design
+
+Core tables:
+
+- vehicles
+- telemetry_data
+- telemetry_snapshots
+- diagnoses
+- failure_predictions
+- cost_estimates
+- service_appointments
+- driver_behaviors
+- feedbacks
+- security_logs
+- ueba_alerts
+- agent_audit_logs
+
+---
+
+# Setup Instructions
+
+## Clone Repository
+
+```bash
+git clone https://github.com/samudragupto/predictive-maintenance-system.git
+cd predictive-maintenance-system
+```
+
+---
+
+## Backend Setup
+
+```bash
+cd backend
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+---
+
+## Frontend Setup
+
+```bash
+cd frontend
+npm install
+```
+
+---
+
+# Run Locally
+
+### Start Backend
+
+```bash
+python -m backend.main
+```
+
+### Start Frontend
+
+```bash
+npm run dev
+```
+
+### Seed Historical Data
+
+```bash
+python backend/seed_history.py
+```
+
+### Train ML Model
+
+```bash
+python backend/train_ml.py
+```
+
+### Run Simulator
+
+```bash
+python fleet_simulator.py
+```
+
+---
+
+# Docker Infrastructure
+
+Start all services:
+
+```bash
+docker-compose up -d
+```
+
+Services started:
+
+- PostgreSQL
+- Redis
+- Kafka
+- Zookeeper
+- Kafka UI
+
+Kafka UI:
+
+```
+http://localhost:8081
+```
+
+---
+
+# API Overview
+
+Main endpoints:
+
+```
+/api/v1/vehicles
+/api/v1/telemetry
+/api/v1/diagnoses
+/api/v1/cost-estimates
+/api/v1/appointments
+/api/v1/driver-behavior
+/api/v1/feedback
+/api/v1/agents
+/api/v1/security
+/api/v1/dashboard
+```
+
+API docs:
+
+```
+http://localhost:8000/docs
+```
+
+---
+
+# Real-Time Data Modes
+
+### Mode 1 — Historical Seeded Data
+
+```
+seed_history.py
+```
+
+### Mode 2 — Internal Real-Time Simulation
+
+Background simulator tasks.
+
+### Mode 3 — External Replay / IoT Feed
+
+Sources:
+
+- `fleet_simulator.py`
+- dataset replay
+- real IoT telemetry
+
+---
+
+# Future Enterprise Enhancements
+
+- TimescaleDB telemetry hypertables
+- Elasticsearch analytics
+- Kubernetes deployment
+- Alembic migrations
+- RBAC / SSO
+- WebSocket streaming
+- Real OBD-II integration
+- LSTM/Transformer failure forecasting
+- Multi-region deployment
+- Observability (Prometheus + Grafana)
+
+---
+
+# License
+
+Specify your preferred license.
+
+Example:
+
+```
+MIT License
+```
